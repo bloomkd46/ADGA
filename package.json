@@ -1,6 +1,6 @@
 {
   "name": "adga",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Unofficial ADGA (https://app.adga.org/) node.js library (SDK)",
   "license": "Apache-2.0",
   "repository": {

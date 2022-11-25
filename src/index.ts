@@ -9,8 +9,18 @@ import {
 
 export * from './interfaces';
 export default class ADGA {
-  server!: AxiosInstance;
-  id?: number;
+  private constructor() {
+    //All initialization done in Init();
+  }
+
+  static async init(username: string, password: string) {
+    const adga = new ADGA();
+    await adga.login(username, password);
+    return adga;
+  }
+
+  private server!: AxiosInstance;
+  private id?: number;
   async login(username: string, password: string): Promise<Login['result']> {
     const res: Login = (await axios.post('https://app.adga.org/api/TokenAuth/Authenticate',
       JSON.stringify({ userNameOrEmailAddress: username, password: password }),

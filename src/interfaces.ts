@@ -360,7 +360,7 @@ export interface OwnedGoats extends Response {
       ownerAccount: null;
       animalTattoo: Tattoo;
       breed: Breed;
-      conformsToBreedID: null;
+      conformsToBreed: null;
       memberTattoo: string;
       memberTattooLocation: 'RE' | 'LE';
       birthTattoo: string;

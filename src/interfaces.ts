@@ -775,3 +775,35 @@ export interface People extends Response {
     }[];
   };
 }
+export interface Awards extends Response {
+  result: {
+    totalCount: number;
+    items: [
+      {
+        animalId: number;
+        awardId: 12;
+        awardCode: '*B';
+        awardDescription: '*BUCK';
+        awardYear: number;
+        creationTime: string;
+        processedDate: string;
+        staffUserId: null;
+        isActive: boolean;
+        awardCount: 1;
+        id: 523997;
+      } | {
+        animalId: number;
+        awardId: number;
+        awardCode: string;
+        awardDescription: string;
+        awardYear: number;
+        creationTime: string;
+        processedDate: string;
+        staffUserId: null;
+        isActive: boolean;
+        awardCount: number;
+        id: number;
+      }
+    ];
+  };
+}

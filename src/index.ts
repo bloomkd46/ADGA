@@ -101,4 +101,8 @@ export default class ADGA {
   async getPeople(name: string): Promise<People['result']> {
     return (await this.server.get(`account/AccountLookup/GetAvailableAccountsForAuthorization?FilterString=${name}`)).data.result;
   }
+
+  async getAwards(id: number): Promise<Awards['result']> {
+    return (await this.server.get(`animalaward/AnimalAward/getall?animalId=${id}`)).data.result;
+  }
 }

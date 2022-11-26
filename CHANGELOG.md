@@ -1,3 +1,7 @@
+### 2.1.1 
+* Fixed getGoats() To Handle Empty Arrays
+
+
 ### 2.1.0 
 * Added getAwards() function
 

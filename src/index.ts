@@ -95,6 +95,9 @@ export default class ADGA {
   }
 
   async getGoats(ids: number[]): Promise<Goats['result']> {
+    if (!ids.length) {
+      return { totalCount: 0, items: [] };
+    }
     return (await this.server.get(`animal/AnimalLookup/getall?filterExpression=Id in (${ids.join(', ')})`)).data.result;
   }
 

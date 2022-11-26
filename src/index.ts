@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 
 import {
-  AccountBalance, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinkedAccounts, Login, MembershipDetails, OwnedGoats, People,
-  YearTattoo,
+  AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinkedAccounts, Login, MembershipDetails, OwnedGoats,
+  People, YearTattoo,
 } from './interfaces';
 
 

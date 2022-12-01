@@ -39,7 +39,7 @@ export default class ADGA {
           return this.server[(err.request.method as string).toLowerCase()]((err.request.path as string).replace('/api/services/', '/'), {
             headers: {
               'Attempt': 2,
-            }
+            },
           });
         }
       }

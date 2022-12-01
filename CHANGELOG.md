@@ -1,3 +1,7 @@
+### 3.1.1 
+* Fixed missing non-critical line
+
+
 ### 3.1.0 
 * Numerous tweaks and improvements
 

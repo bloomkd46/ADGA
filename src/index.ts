@@ -19,7 +19,7 @@ export default class ADGA {
   });
 
   private id?: number;
-  constructor(private username, private password) {
+  constructor(private username: string, private password: string) {
     this.server.interceptors.request.use(async (config) => {
       if (this.accessToken === undefined) {
         await this.login();
@@ -75,7 +75,7 @@ export default class ADGA {
   async getCurrentLoginInfo(): Promise<CurrentLoginInfo['result']> {
     const server = this.server;
     server.interceptors.response.use((response) => {
-      this.id = response.data.result.account.id;
+      this.id = (response.data as CurrentLoginInfo).result.accountProfile.account.id;
       return response;
     });
     return (await server.get('/app/Session/GetCurrentLoginInformations')).data.result;

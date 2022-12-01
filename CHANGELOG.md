@@ -1,3 +1,7 @@
+### 3.0.1 
+* Fixed typo in getCurrentLoginInfo()
+
+
 ### 3.0.0 
 * Major API improvements
 ### Breaking Changes:

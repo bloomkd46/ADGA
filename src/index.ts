@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import {
   AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinkedAccounts, Login, MembershipDetails, OwnedGoats,
@@ -9,21 +9,59 @@ import {
 
 export * from './interfaces';
 export default class ADGA {
-  private constructor() {
-    //All initialization done in Init();
+  public encryptedAccessToken?: string;
+  public accessToken?: string;
+  private server = axios.create({
+    baseURL: 'https://app.adga.org/api/services/',
+    headers: {
+      'Accept-Language': 'en-US,en;q=0.9',
+    },
+  });
+
+  private id?: number;
+  constructor(private username, private password) {
+    this.server.interceptors.request.use(async (config) => {
+      if (this.accessToken === undefined) {
+        await this.login();
+      }
+      if (config.headers === undefined) {
+        config.headers = {};
+      }
+      config.headers['Cookie'] = `Adga.AuthToken=${this.accessToken};Adga.TenantId=1;enc_auth_token=${this.encryptedAccessToken}`!;
+      config.headers['Authorization'] = `Bearer ${this.accessToken}`;
+      return config;
+    });
+    const server = this.server;
+    this.server.interceptors.response.use(undefined, async (err: AxiosError) => {
+      if (err.response?.status === 401) {
+        this.accessToken === undefined;
+        await this.login();
+        if (err.request !== undefined) {
+          return server[(err.request.method as string).toLowerCase()]((err.request.path as string).replace('/api/services/', '/'));
+        }
+      }
+    });
   }
 
-  static async init(username: string, password: string) {
+  /*static async init(username: string, password: string) {
     const adga = new ADGA();
     await adga.login(username, password);
     return adga;
-  }
+  }*/
 
-  private server!: AxiosInstance;
-  private id?: number;
-  async login(username: string, password: string): Promise<Login['result']> {
-    const res: Login = (await axios.post('https://app.adga.org/api/TokenAuth/Authenticate',
-      JSON.stringify({ userNameOrEmailAddress: username, password: password }),
+
+  async login(): Promise<Login['result']> {
+    const server = axios.create();
+    server.interceptors.response.use((response) => {
+      this.encryptedAccessToken = response.data.result.encryptedAccessToken;
+      this.accessToken = response.data.result.accessToken;
+      //setTimeout(() => this.accessToken = undefined, (response.data.expireInSeconds - 1) * 1000);
+      // Any status code that lie within the range of 2xx cause this function to trigger
+      // Do something with response data
+      return response;
+    });
+    const res: Login = (await server.post('https://app.adga.org/api/TokenAuth/Authenticate',
+      JSON.stringify({ userNameOrEmailAddress: this.username, password: this.password }),
       {
         headers: {
           'Accept-Language': 'en-US,en;q=0.9',
@@ -31,28 +69,16 @@ export default class ADGA {
           'Cookie': 'Adga.TenantId=1',
         },
       })).data;
-    this.server = axios.create({
-      baseURL: 'https://app.adga.org/api/services/',
-      headers: {
-        'Host': 'app.adga.org',
-        'Content-Type': 'application/json',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Cookie': `Adga.AuthToken=${res.result.accessToken};Adga.TenantId=1;enc_auth_token=${res.result.encryptedAccessToken}`,
-        'Connection': 'keep-alive',
-        'Adga.TenantId': 1,
-        'Accept': '*/*',
-        'Referer': 'https://app.adga.org/',
-        'Authorization': `Bearer ${res.result.accessToken}`,
-        'Accept-Language': 'en-US,en;q=0.9',
-      },
-    });
     return res.result;
   }
 
   async getCurrentLoginInfo(): Promise<CurrentLoginInfo['result']> {
-    const result: CurrentLoginInfo['result'] = (await this.server.get('/app/Session/GetCurrentLoginInformations')).data.result;
-    this.id = result.accountProfile.account.id;
-    return result;
+    const server = this.server;
+    server.interceptors.response.use((response) => {
+      this.id = response.data.result.account.id;
+      return response;
+    });
+    return (await server.get('/app/Session/GetCurrentLoginInformations')).data.result;
   }
 
   async getTattooCode(year: number): Promise<YearTattoo['result']> {

@@ -1,3 +1,9 @@
+### 3.0.0 
+* Major API improvements
+### Breaking Changes:
+* Use constructor instead of static init
+
+
 ### 2.1.1 
 * Fixed getGoats() To Handle Empty Arrays
 

@@ -43,7 +43,7 @@ export default class ADGA {
           });
         }
       }
-      //return Promise.reject(err);
+      return Promise.reject(err);
     });
   }
 

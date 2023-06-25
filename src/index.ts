@@ -2,9 +2,8 @@ import axios, { AxiosError } from 'axios';
 
 import {
   AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinkedAccounts, Login, MembershipDetails, OwnedGoats,
-  People, YearTattoo,
+  People, TransferHistory, YearTattoo,
 } from './interfaces';
-
 
 
 export * from './interfaces';
@@ -134,4 +133,7 @@ export default class ADGA {
   async getAwards(id: number): Promise<Awards['result']> {
     return (await this.server.get(`animalaward/AnimalAward/getall?animalId=${id}`)).data.result;
   }
-}
+  async getTransferHistory(id: number): Promise<TransferHistory['result']> {
+    return (await this.server.get(`animal/TransferHistory/getall?animalId=${id}`)).data.result;
+  }
+};

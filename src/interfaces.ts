@@ -807,3 +807,58 @@ export interface Awards extends Response {
     ];
   };
 }
+export interface TransferHistory extends Response {
+  result: {
+    totalCount: number;
+    items: Transfer[];
+  };
+}
+export interface Transfer {
+  ownerAccountId: number;
+  normalizeId: string;
+  animalId: number;
+  effectiveFrom: string;
+  effectiveFromLongDate: string;
+  effectiveTo: null | string;
+  isActive: boolean;
+  ownerAccount: {
+    /** LAST NAME */
+    lastName: string;
+    /** FIRST NAME */
+    firstName: string;
+    organizationName: null;
+    isActive: boolean;
+    isOrg: boolean;
+    emailAddress: null;
+    /** FIRST & LAST NAME */
+    displayName: string;
+    associatedUserId: number;
+    isPrimary: boolean;
+    creditLimit: 20;
+    lifeTimeCredit: null;
+    membershipStatus: 'Active' | 'Inactive' | string;
+    defaultAddress: {
+      addressLine1: string;
+      addressLine2: string;
+      postalCode: {
+        code: string;
+        isActive: boolean;
+        city: string;
+        stateId: number;
+        countryId: number;
+        state: {
+          code: string;
+          name: string;
+          isActive: boolean;
+          taxRate: null;
+          countryId: number;
+          country: null;
+          id: number;
+        };
+        country: null;
+        id: number;
+      };
+    };
+    id: number;
+  };
+}

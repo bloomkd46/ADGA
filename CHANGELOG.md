@@ -1,3 +1,7 @@
+### 3.2.0 
+* Added getTransferHistory() function
+
+
 ### 3.1.1 
 * Fixed missing non-critical line
 

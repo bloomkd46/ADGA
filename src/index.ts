@@ -135,6 +135,6 @@ export default class ADGA {
   }
 
   async getTransferHistory(id: number): Promise<TransferHistory['result']> {
-    return (await this.server.get(`animal/TransferHistory/getall?animalId=${id}`)).data.result;
+    return (await this.server.get(`animal/StaffTransferHistory/getall?animalId=${id}`)).data.result;
   }
 }

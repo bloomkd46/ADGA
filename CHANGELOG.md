@@ -1,3 +1,7 @@
+### 3.2.1 
+* Fixed getTransferHistory() to match new ADGA API
+
+
 ### 3.2.0 
 * Added getTransferHistory() function
 

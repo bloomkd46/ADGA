@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 
 import {
-  AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinkedAccounts, Login, MembershipDetails, OwnedGoats,
-  People, TransferHistory, YearTattoo,
+  AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinearAppraisal, LinearAppraisalYoungStock, LinkedAccounts,
+  Login, MembershipDetails, OwnedGoats, People, Shows, TransferHistory, YearTattoo,
 } from './interfaces';
 
 
@@ -132,6 +132,16 @@ export default class ADGA {
 
   async getAwards(id: number): Promise<Awards['result']> {
     return (await this.server.get(`animalaward/AnimalAward/getall?animalId=${id}`)).data.result;
+  }
+
+  async getLinearAppraisal(id: number, youngStock?: false): Promise<LinearAppraisal['result']>;
+  async getLinearAppraisal(id: number, youngStock: true): Promise<LinearAppraisalYoungStock['result']>;
+  async getLinearAppraisal(id: number, youngStock?: boolean): Promise<LinearAppraisal['result'] | LinearAppraisalYoungStock['result']> {
+    return (await this.server.get(`animal/linearAppraisalScoreLookup/GetAll?animalId=${id}&isYoungStock=${!!youngStock}`)).data.result;
+  }
+
+  async getShows(id: number): Promise<Shows['result']> {
+    return (await this.server.get(`animal/ROABreedWinnerLookup/GetAll?animalId=${id}`)).data.result;
   }
 
   async getTransferHistory(id: number): Promise<TransferHistory['result']> {

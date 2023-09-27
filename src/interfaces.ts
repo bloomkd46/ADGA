@@ -778,33 +778,160 @@ export interface People extends Response {
 export interface Awards extends Response {
   result: {
     totalCount: number;
-    items: [
-      {
-        animalId: number;
-        awardId: 12;
-        awardCode: '*B';
-        awardDescription: '*BUCK';
-        awardYear: number;
-        creationTime: string;
-        processedDate: string;
-        staffUserId: null;
-        isActive: boolean;
-        awardCount: 1;
-        id: 523997;
-      } | {
-        animalId: number;
-        awardId: number;
-        awardCode: string;
-        awardDescription: string;
-        awardYear: number;
-        creationTime: string;
-        processedDate: string;
-        staffUserId: null;
-        isActive: boolean;
-        awardCount: number;
-        id: number;
-      }
-    ];
+    items: ({
+      animalId: number;
+      awardId: 12;
+      awardCode: '*B';
+      awardDescription: '*BUCK';
+      awardYear: number;
+      creationTime: string;
+      processedDate: string;
+      staffUserId: null;
+      isActive: boolean;
+      awardCount: 1;
+      id: 523997;
+    } | {
+      animalId: number;
+      awardId: number;
+      awardCode: string;
+      awardDescription: string;
+      awardYear: number;
+      creationTime: string;
+      processedDate: string;
+      staffUserId: null;
+      isActive: boolean;
+      awardCount: number;
+      id: number;
+    })[];
+  };
+}
+export interface Shows extends Response {
+  result: {
+    totalCount: number;
+    items: {
+      roaBreedId: number;
+      animalId: number;
+      winnerType: 'GrandChampion' | 'ReserveGrandChampion' | 'ChallengeWinner';
+      animalOwnerId: number;
+      isOwnerAuthorised: boolean;
+      isTattooProblem: boolean;
+      tattooProblem: number;
+      tattooProblemDescription: null;
+      legProcessAward: 'ULEG' | 'RLEG' | 'CHRL' | null;
+      tenantId: number;
+      legType: 'U' | 'R' | null;
+      legNumber: number;
+      breedName: 'NIGERIAN DWARF' | string;
+      showSanctionId: number;
+      showName: string;
+      sanctionShowTime: string;
+      judgeId: null;
+      isAbsent: boolean;
+      id: number;
+    }[];
+  };
+}
+export type LAClassifications = 'P' | 'A' | 'P' | 'G' | '+' | 'V' | 'E';
+export interface LinearAppraisalYoungStock extends Response {
+  result: {
+    totalCount: number;
+    items: {
+      animalId: number;
+      lactationNumber: null;
+      lactationStart: null;
+      linearAppraisalRequestId: number;
+      appraisalDate: string;
+      stature: number;
+      rearLegs: number;
+      udderDepth: null;
+      strength: number;
+      foreUdder: number;
+      teatPlacement: null;
+      dairyness: number;
+      rearUderHeight: number;
+      teatDiameter: null;
+      rumpAngle: number;
+      rearUdderArch: null;
+      rearUdderSideView: null;
+      rumpWidth: number;
+      medialSuspensoryLigament: null;
+      teatLength: null;
+      head: LAClassifications;
+      back: LAClassifications;
+      shoulders: LAClassifications;
+      rump: LAClassifications;
+      legsFront: LAClassifications;
+      texture: null;
+      legsRear: LAClassifications;
+      feet: LAClassifications;
+      miscellaneous1: null | number;
+      miscellaneous2: null | number;
+      miscellaneous3: null | number;
+      generalAppearance: LAClassifications;
+      dairyStrength: LAClassifications;
+      bodyCapacity: LAClassifications;
+      mammarySystem: null;
+      finalScore: null;
+      notes: null;
+      isChecked: boolean;
+      isPermanent: boolean;
+      isScored: boolean;
+      isYoungStock: true;
+      youngStockTotalScore: LAClassifications;
+      isActive: boolean;
+      id: number;
+    }[];
+  };
+}
+export interface LinearAppraisal extends Response {
+  result: {
+    totalCount: number;
+    items: {
+      animalId: number;
+      lactationNumber: number;
+      lactationStart: '2' | string;
+      linearAppraisalRequestId: number;
+      appraisalDate: string;
+      stature: number;
+      rearLegs: number;
+      udderDepth: number;
+      strength: number;
+      foreUdder: number;
+      teatPlacement: number;
+      dairyness: number;
+      rearUderHeight: number;
+      teatDiameter: number;
+      rumpAngle: number;
+      rearUdderArch: number;
+      rearUdderSideView: number;
+      rumpWidth: number;
+      medialSuspensoryLigament: number;
+      teatLength: null | number;
+      head: LAClassifications;
+      back: LAClassifications;
+      shoulders: LAClassifications;
+      rump: LAClassifications;
+      legsFront: LAClassifications;
+      texture: LAClassifications;
+      legsRear: LAClassifications;
+      feet: LAClassifications;
+      miscellaneous1: null | number;
+      miscellaneous2: null | number;
+      miscellaneous3: null | number;
+      generalAppearance: LAClassifications;
+      dairyStrength: LAClassifications;
+      bodyCapacity: LAClassifications;
+      mammarySystem: LAClassifications;
+      finalScore: number;
+      notes: null;
+      isChecked: boolean;
+      isPermanent: boolean;
+      isScored: boolean;
+      isYoungStock: false;
+      youngStockTotalScore: null;
+      isActive: boolean;
+      id: number;
+    }[];
   };
 }
 export interface TransferHistory extends Response {

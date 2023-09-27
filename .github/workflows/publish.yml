@@ -48,7 +48,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
           git add --all
-          npm version ${{ github.event.release.tag_name }}
+          yarn version --new-version ${{ github.event.release.tag_name }}
           git tag -d v${{ github.event.release.tag_name }}
           
       - name: Push changes
@@ -58,7 +58,7 @@ jobs:
            github_token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Install Dependencies
-        run: npm install
+        run: npm install -g yarn && yarn
         
       - name: Publish Beta to npm
         if: github.event.release.prerelease == true

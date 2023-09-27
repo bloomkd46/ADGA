@@ -1,3 +1,8 @@
+### 3.3.0 
+* Added getLinearAppraisal() function
+* Added getShows() function
+
+
 ### 3.2.1 
 * Fixed getTransferHistory() to match new ADGA API
 

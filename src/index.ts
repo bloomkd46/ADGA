@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 
 import {
   AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinearAppraisal, LinearAppraisalYoungStock, LinkedAccounts,
-  Login, MembershipDetails, OwnedGoats, People, Shows, TransferHistory, YearTattoo,
+  Login, MembershipDetails, OwnedGoats, People, Progeny, Shows, TransferHistory, YearTattoo,
 } from './interfaces';
 
 
@@ -146,5 +146,17 @@ export default class ADGA {
 
   async getTransferHistory(id: number): Promise<TransferHistory['result']> {
     return (await this.server.get(`animal/StaffTransferHistory/getall?animalId=${id}`)).data.result;
+  }
+
+  async getDamProgeny(damId: number): Promise<Progeny['result']> {
+    return (await this.server.get(`animal/AnimalLookup/getall?damId=${damId}`)).data.result;
+  }
+
+  async getSireProgeny(sireId: number): Promise<Progeny['result']> {
+    return (await this.server.get(`animal/AnimalLookup/getall?sireId=${sireId}`)).data.result;
+  }
+
+  async getProgeny(damId?: number, sireId?: number): Promise<Progeny['result']> {
+    return (await this.server.get(`animal/AnimalLookup/getall?${damId ? `damId=${damId}` : ''}${(damId && sireId) ? '&' : ''}${sireId ? `sireId=${sireId}` : ''}`)).data.result;
   }
 }

@@ -83,7 +83,7 @@ export interface CurrentLoginInfo extends Response {
     accountProfile: {
       account: {
         tenantId: 1;
-        associatedUserId: number;
+        associatedUserId: number | null;
         /** LAST NAME */
         lastName: 'BLOOM';
         /** FIRST NAME */
@@ -92,7 +92,7 @@ export interface CurrentLoginInfo extends Response {
         code: null;
         isActive: boolean;
         isPrimary: boolean;
-        membershipStatus: 'Active' | 'Inactive' | string;
+        membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
         id: number;
       };
       addresses: Addresses;
@@ -155,12 +155,12 @@ export interface LinkedAccounts extends Response {
       emailAddress: null;
       /** FIRST & LAST NAME */
       displayName: string;
-      associatedUserId: number;
+      associatedUserId: number | null;
       isPrimary: boolean;
       addresses: Addresses;
       creditLimit: 20 | number;
       lifeTimeCredit: null;
-      membershipStatus: 'Active' | 'Inactive' | string;
+      membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
       memebrshipType: 'Youth (Must be under 21 years old)' | string;
       isSponsor: boolean;
       isSponsee: boolean;
@@ -466,7 +466,7 @@ export interface MembershipDetails extends Response {
       emailAddress: null;
       /** FIRST & LAST NAME */
       displayName: 'KOLTON BLOOM';
-      associatedUserId: number;
+      associatedUserId: number | null;
       isPrimary: boolean;
       testerId: null;
       code: null;
@@ -483,7 +483,7 @@ export interface MembershipDetails extends Response {
       isEmailConfirmed: boolean;
       creditLimit: 20;
       lifeTimeCredit: null;
-      membershipStatus: 'Active' | 'Inactive' | string;
+      membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
       memebrshipType: null;
       isServingGracePeriod: boolean;
       membershipRenewalLastDate: null;
@@ -578,11 +578,11 @@ export interface Goat extends Response {
       emailAddress: null;
       /** FIRST & LAST NAME */
       displayName: string;
-      associatedUserId: number;
+      associatedUserId: number | null;
       isPrimary: boolean;
       creditLimit: 20;
       lifeTimeCredit: null;
-      membershipStatus: 'Active' | 'Inactive' | string;
+      membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
       defaultAddress: null;
       id: number;
     };
@@ -597,11 +597,11 @@ export interface Goat extends Response {
       emailAddress: null;
       /** FIRST & LAST NAME */
       displayName: string;
-      associatedUserId: number;
+      associatedUserId: number | null;
       isPrimary: boolean;
       creditLimit: 20;
       lifeTimeCredit: null;
-      membershipStatus: 'Active' | 'Inactive' | string;
+      membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
       defaultAddress: null;
       id: number;
     };
@@ -660,11 +660,11 @@ export interface Goats extends Response {
         emailAddress: null;
         /** FIRST & LAST NAME */
         displayName: string;
-        associatedUserId: number;
+        associatedUserId: number | null;
         isPrimary: boolean;
         creditLimit: 20;
         lifeTimeCredit: null;
-        membershipStatus: 'Active' | 'Inactive' | string;
+        membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
         defaultAddress: null;
         id: number;
       };
@@ -679,11 +679,11 @@ export interface Goats extends Response {
         emailAddress: null;
         /** FIRST & LAST NAME */
         displayName: string;
-        associatedUserId: number;
+        associatedUserId: number | null;
         isPrimary: boolean;
         creditLimit: 20;
         lifeTimeCredit: null;
-        membershipStatus: 'Active' | 'Inactive' | string;
+        membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
         defaultAddress: null;
         id: number;
       };
@@ -717,7 +717,7 @@ export interface People extends Response {
       emailAddress: string;
       /** First & Last Name */
       displayName: string;
-      associatedUserId: number;
+      associatedUserId: number | null;
       isPrimary: boolean;
       testerId: null;
       code: null;
@@ -765,7 +765,7 @@ export interface People extends Response {
       isEmailConfirmed: boolean;
       creditLimit: null;
       lifeTimeCredit: null;
-      membershipStatus: 'Active' | 'Inactive' | string;
+      membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
       memebrshipType: null;
       isServingGracePeriod: boolean;
       membershipRenewalLastDate: null;
@@ -934,6 +934,84 @@ export interface LinearAppraisal extends Response {
     }[];
   };
 }
+export interface Progeny extends Response {
+  result: {
+    totalCount: number;
+    items: {
+      name: string;
+      normalizeId: string;
+      breedId: BreedID;
+      breederAccountId: number;
+      ownerAccountId: number;
+      sireId: number;
+      damId: number;
+      sex: 'Female' | 'Male';
+      dateOfBirth: string;
+      dateOfDeath: null | string;
+      isActive: boolean;
+      hornId: HornID;
+      earId: EarID;
+      colorComment: null | string;
+      numberBucks: number;
+      numberDoes: number;
+      isAlive: boolean;
+      isLeased: boolean;
+      isAdgaRegistered: boolean;
+      horn: null;
+      ear: null;
+      breederAccount: {
+        /** LAST NAME */
+        lastName: string;
+        /** FIRST NAME */
+        firstName: string;
+        organizationName: null;
+        isActive: boolean;
+        isOrg: boolean;
+        emailAddress: null;
+        /** FIRST & LAST NAME */
+        displayName: string;
+        associatedUserId: number | null;
+        isPrimary: boolean;
+        creditLimit: 20;
+        lifeTimeCredit: null;
+        membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
+        defaultAddress: null;
+        id: number;
+      };
+      ownerAccount: {
+        /** LAST NAME */
+        lastName: string;
+        /** FIRST NAME */
+        firstName: string;
+        organizationName: null;
+        isActive: boolean;
+        isOrg: boolean;
+        emailAddress: null;
+        /** FIRST & LAST NAME */
+        displayName: string;
+        associatedUserId: number | null;
+        isPrimary: boolean;
+        creditLimit: 20;
+        lifeTimeCredit: null;
+        membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
+        defaultAddress: null;
+        id: number;
+      };
+      animalTattoo: [];
+      breed: null;
+      conformsToBreed: null;
+      aiMemoId: null;
+      aiMating: null;
+      embryoTransfer: null;
+      serviceMemoId: null;
+      memberTattoo: '';
+      memberTattooLocation: '';
+      birthTattoo: '';
+      birthTattooLocation: '';
+      id: number;
+    }[];
+  };
+}
 export interface TransferHistory extends Response {
   result: {
     totalCount: number;
@@ -959,11 +1037,11 @@ export interface Transfer {
     emailAddress: null;
     /** FIRST & LAST NAME */
     displayName: string;
-    associatedUserId: number;
+    associatedUserId: number | null;
     isPrimary: boolean;
     creditLimit: 20;
     lifeTimeCredit: null;
-    membershipStatus: 'Active' | 'Inactive' | string;
+    membershipStatus: 'Active' | 'Inactive' | 'NonMember' | string;
     defaultAddress: {
       addressLine1: string;
       addressLine2: string;

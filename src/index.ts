@@ -12,6 +12,7 @@ export default class ADGA {
   public accessToken?: string;
   private readonly server = axios.create({
     baseURL: 'https://app.adga.org/api/services/',
+    adapter: require('axios/lib/adapters/http'),
     headers: {
       'Accept-Language': 'en-US,en;q=0.9',
     },
@@ -54,7 +55,9 @@ export default class ADGA {
 
 
   async login(): Promise<Login['result']> {
-    const server = axios.create();
+    const server = axios.create({
+      adapter: require('axios/lib/adapters/http'),
+    });
     server.interceptors.response.use((response) => {
       this.encryptedAccessToken = response.data.result.encryptedAccessToken;
       this.accessToken = response.data.result.accessToken;

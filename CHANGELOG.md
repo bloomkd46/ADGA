@@ -1,3 +1,7 @@
+### 3.4.1 
+* Tweaked Axios to force http (necessary to use cookies field in electron)
+
+
 ### 3.4.0 
 * Added getProgeny() function
 

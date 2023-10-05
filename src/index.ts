@@ -19,10 +19,24 @@ export default class ADGA {
   });
 
   private id?: number;
+  private loggingIn?: boolean;
   constructor(private username: string, private password: string) {
     this.server.interceptors.request.use(async (config) => {
       if (this.accessToken === undefined) {
-        await this.login();
+        if (this.loggingIn) {
+          await new Promise<void>(resolve => {
+            const interval = setInterval(() => {
+              if (!this.loggingIn) {
+                clearInterval(interval);
+                resolve();
+              }
+            });
+          });
+        } else {
+          this.loggingIn = true;
+          await this.login();
+          this.loggingIn = false;
+        }
       }
       if (config.headers === undefined) {
         config.headers = {};
@@ -34,7 +48,20 @@ export default class ADGA {
     this.server.interceptors.response.use(undefined, async (err: AxiosError) => {
       if (err.response?.status === 401) {
         this.accessToken === undefined;
-        await this.login();
+        if (this.loggingIn) {
+          await new Promise<void>(resolve => {
+            const interval = setInterval(() => {
+              if (!this.loggingIn) {
+                clearInterval(interval);
+                resolve();
+              }
+            });
+          });
+        } else {
+          this.loggingIn = true;
+          await this.login();
+          this.loggingIn = false;
+        }
         if (err.request !== undefined && !(err.request._header?.split('\r\n') as string[] | undefined)?.includes('Attempt: 2')) {
           return this.server[(err.request.method as string).toLowerCase()]((err.request.path as string).replace('/api/services/', '/'), {
             headers: {
@@ -52,7 +79,6 @@ export default class ADGA {
     await adga.login(username, password);
     return adga;
   }*/
-
 
   async login(): Promise<Login['result']> {
     const server = axios.create({

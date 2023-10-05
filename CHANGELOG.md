@@ -1,3 +1,7 @@
+### 3.4.2 
+* fixed login errors if multiple concurrent requests
+
+
 ### 3.4.1 
 * Tweaked Axios to force http (necessary to use cookies field in electron)
 

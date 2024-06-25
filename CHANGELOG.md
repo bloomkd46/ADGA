@@ -1,3 +1,7 @@
+### 3.4.3 
+* Fixed a bug causing requests to hang indefinitely if the credentials are invalid
+
+
 ### 3.4.2 
 * fixed login errors if multiple concurrent requests
 

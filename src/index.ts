@@ -34,8 +34,11 @@ export default class ADGA {
           });
         } else {
           this.loggingIn = true;
-          await this.login();
-          this.loggingIn = false;
+          try {
+            await this.login();
+          } finally {
+            this.loggingIn = false;
+          }
         }
       }
       if (config.headers === undefined) {
@@ -59,8 +62,11 @@ export default class ADGA {
           });
         } else {
           this.loggingIn = true;
-          await this.login();
-          this.loggingIn = false;
+          try {
+            await this.login();
+          } finally {
+            this.loggingIn = false;
+          }
         }
         if (err.request !== undefined && !(err.request._header?.split('\r\n') as string[] | undefined)?.includes('Attempt: 2')) {
           return this.server[(err.request.method as string).toLowerCase()]((err.request.path as string).replace('/api/services/', '/'), {

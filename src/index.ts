@@ -194,4 +194,12 @@ export default class ADGA {
   async getProgeny(damId?: number, sireId?: number): Promise<Progeny['result']> {
     return (await this.server.get(`animal/AnimalLookup/getall?${damId ? `damId=${damId}` : ''}${(damId && sireId) ? '&' : ''}${sireId ? `sireId=${sireId}` : ''}`)).data.result;
   }
+
+  async getAllGoatsByNormalizeId(normalizeId: string): Promise<Goats['result']> {
+    return (await this.server.get(`account/AnimalLookup/GetAllGoats?filterExpression=NORMALIZEID.CONTAINS("${normalizeId}")`)).data.result;
+  }
+
+  async getAllGoatsByName(name: string): Promise<Goats['result']> {
+    return (await this.server.get(`account/AnimalLookup/GetAllGoats?filterExpression=NAME.CONTAINS("${name}")`)).data.result;
+  }
 }

@@ -1,3 +1,8 @@
+### 3.5.0 
+* Added the ability to search for goats by their normalizeId
+* Added the ability to search for goats by their name
+
+
 ### 3.4.3 
 * Fixed a bug causing requests to hang indefinitely if the credentials are invalid
 

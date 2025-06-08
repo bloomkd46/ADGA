@@ -1,0 +1,39 @@
+name: Release app
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, beta]
+permissions:
+  contents: write
+
+jobs:
+  publish_release:
+    runs-on: ubuntu-latest
+    env:
+      YARN_IGNORE_ENGINES: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Fix version
+        if: github.ref_name == 'main'
+        run: yarn fix-version
+
+      - name: Release app
+        run: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BEFORE: ${{ github.event.before }}

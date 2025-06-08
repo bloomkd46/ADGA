@@ -35,13 +35,13 @@ jobs:
         run: yarn build
       - name: Publish to npm
         if: github.ref_name == 'main'
-        run: yarn publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Publish to npm beta
         if: github.ref_name == 'beta'
-        run: yarn publish --tag beta
+        run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

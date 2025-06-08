@@ -1,3 +1,6 @@
+## 3.6.0-beta.3
+* Fixed a bug in the deploy job that caused the package to not be published
+
 ## 3.6.0-beta.2
 * Added missing job to deploy the code to npm
 

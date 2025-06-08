@@ -1,3 +1,6 @@
+## 3.6.0-beta.1
+* Added support for interacting with the CDCB to access milk records
+
 ## 3.5.1
 * Restructered the release process
 

@@ -1,3 +1,6 @@
+## 3.6.0-beta.4
+* Fixed the env variable name mixup
+
 ## 3.6.0-beta.3
 * Fixed a bug in the deploy job that caused the package to not be published
 

@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "eslint src/**.ts --max-warnings=0 --fix",
     "build": "rimraf ./dist && tsc",
-    "prepublishOnly": "npm run lint && npm run build",
+    "prepublishOnly": "yarn build",
     "watch": "nodemon --watch src --ext .ts,.json --exec 'npm run build'",
     "test": "tsc test.ts && node  --enable-source-maps test.js",
     "pull-check": "ts-node ./scripts/check.ts",

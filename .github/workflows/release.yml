@@ -7,7 +7,46 @@ permissions:
   contents: write
 
 jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      YARN_IGNORE_ENGINES: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Fix version
+        if: github.ref_name == 'main'
+        run: yarn fix-version
+
+      - name: Build Project
+        env:
+          FORCE_COLOR: 3
+        run: yarn build
+      - name: Publish to npm
+        if: github.ref_name == 'main'
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Publish to npm beta
+        if: github.ref_name == 'beta'
+        run: yarn publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   publish_release:
+    needs: publish
     runs-on: ubuntu-latest
     env:
       YARN_IGNORE_ENGINES: true
@@ -15,8 +54,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node 20
         uses: actions/setup-node@v4

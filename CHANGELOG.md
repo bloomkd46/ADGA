@@ -1,3 +1,6 @@
+## 3.6.0-beta.2
+* Added missing job to deploy the code to npm
+
 ## 3.6.0-beta.1
 * Added support for interacting with the CDCB to access milk records
 

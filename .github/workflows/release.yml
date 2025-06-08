@@ -32,15 +32,11 @@ jobs:
 
       - name: Publish to npm
         if: github.ref_name == 'main'
-        run: npm publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn npm publish --otp ${{secrets.NPM_TOKEN }}
       
       - name: Publish to npm beta
         if: github.ref_name == 'beta'
-        run: npm publish --tag beta
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn npm publish --tag beta --otp ${{secrets.NPM_TOKEN }}
 
   publish_release:
     needs: publish

@@ -1,3 +1,6 @@
+## 3.6.0-beta.5
+* switched to yarn with `--otp` flag to publish to npm
+
 ## 3.6.0-beta.4
 * Fixed the env variable name mixup
 

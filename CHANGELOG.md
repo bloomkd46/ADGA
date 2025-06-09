@@ -1,3 +1,6 @@
+## 3.6.1-beta.2
+* Fixed a bug in the CDCB `getLactationsTestDate()` url that caused the search to fail
+
 ## 3.6.1-beta.1
 * Updated valid search options for the CDCB
 

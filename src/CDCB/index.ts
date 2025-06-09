@@ -101,7 +101,7 @@ export default class CDCB {
     if (typeof animalIdOrAnimal === 'object') {
       const animal = animalIdOrAnimal as Animal;
       const lactation = animalKeyOrLactation as AnimalLactation;
-      return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animal.animalId}/${animal.animKey}/${lactation.lt}/${animal.sexCode}/${lactation.calvPdate}/${lactation.herdCode}`)).data;
+      return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animal.animalId}/${animal.animKey}/1/${animal.sexCode}/${lactation.calvPdate}/${lactation.herdCode}`)).data;
     } else {
       return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animalIdOrAnimal}/${animalKeyOrLactation}/1/F/${calvPdate}/${herdCode}`)).data;
     }

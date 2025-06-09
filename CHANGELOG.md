@@ -1,3 +1,6 @@
+## 3.6.0-beta.6
+* Switched back to npm for publishing and followed https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages for configuring the token
+
 ## 3.6.0-beta.5
 * switched to yarn with `--otp` flag to publish to npm
 

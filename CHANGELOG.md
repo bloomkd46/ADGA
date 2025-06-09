@@ -1,3 +1,6 @@
+## 3.6.1-beta.1
+* Updated valid search options for the CDCB
+
 ## 3.6.0-beta.7
 * Updated Github Token permissons to allow publishing to npm with provenance
 

@@ -1,3 +1,6 @@
+## 3.6.2-beta.3
+* Made types available for the CDCB functions when imported
+
 ## 3.6.2-beta.2
 * Fixed a bug preventing the CDCB functions from being able to import
 

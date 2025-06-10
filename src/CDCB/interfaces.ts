@@ -15,7 +15,7 @@ export enum QuerySeachOptions {
   PARTIAL_FULL_NAME = 'PARTIAL_FULL_NAME',
   /** Herd ID */
   HERD_ID = 'HERD_ID',
-};
+}
 export interface Animal {
   animalId: string;
   animalId1718: null | unknown;
@@ -92,7 +92,7 @@ input date (@139-146), in the one required segment, will be deleted. */
 }
 /**
  * Mask shown may be any combination of these values
- * 
+ *
  * Mask codes are interpreted by reading each digit segment individually.
  * The number or letter in the first digit of the code refers to a possible combination of codes 10 through 80. The number or letter in the second digit of the code refers to a possible combination of codes 01 through 08. When there is a combination of codes, the code numbers are added together (i.e. codes 04 and 02 would be written as 06). When the code combination added together is greater than 9, alphabetic letters are used (i.e. a = 10, b = 11, ..., f = 15).
  * Possible combinations of codes:
@@ -113,7 +113,7 @@ input date (@139-146), in the one required segment, will be deleted. */
  * e = code 8 and 4 and 2
  * f = code 8 and 4 and 2 and 1
  * ```
- * Examples: 
+ * Examples:
  * @example ```
  * 40 = code 40
  * 82 = codes 80, 02
@@ -139,7 +139,7 @@ export enum LactationMask {
   LACTATION_NOT_USEABLE = '08',
   /** Somatic cell available */
   SOMATIC_CELL_AVAILABLE = '04',
-  /** Milk-only record (for calvings after 1997-01-01) 
+  /** Milk-only record (for calvings after 1997-01-01)
 No management group mates (for calvings before 1997-01-01) */
   MILK_ONLY_RECORD = '02',
   /** Internal use by CDCB */

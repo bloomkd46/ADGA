@@ -5,24 +5,14 @@ export interface Login {
   status: 'success';
 }
 export enum QuerySeachOptions {
-  /** Animal ID (12 bytes) */
-  ANIM_KEY_12 = 'ANIM_KEY_12',
-  /** Animal ID (15 bytes) */
-  ANIM_KEY_15 = 'ANIM_KEY_15',
+  /** Animal ID - Last 6 Characters */
+  ANIM_KEY_6 = 'ANIM_KEY_6',
   /** Animal ID (17 bytes)/ Animal ID + Sex Code (18 bytes) */
-  ANIM_KEY_17 = 'ANIM_KEY_17',
-  /** Animal Interbull ID (19 bytes) */
-  ITB_ID = 'ITB_ID',
-  /** Sample ID (20 bytes max) */
-  SAMPLE_ID_SEX = 'SAMPLE_ID_SEX',
-  /** NAAB Code */
-  NAAB_CODE = 'NAAB_CODE',
+  ANIM_KEY_17_ANIM_KEY_17_SEX = 'ANIM_KEY_17_ANIM_KEY_17_SEX',
   /** Short Name */
   SHORT_NAME = 'SHORT_NAME',
   /** Partial Full Name */
   PARTIAL_FULL_NAME = 'PARTIAL_FULL_NAME',
-  /** Herd + Cow Control Number */
-  HERD_CTRL_NUM = 'HERD_CTRL_NUM',
   /** Herd ID */
   HERD_ID = 'HERD_ID',
 };

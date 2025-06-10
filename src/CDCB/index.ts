@@ -81,7 +81,7 @@ export default class CDCB {
     });
     return (await server.get<Login>('https://webconnect.uscdcb.com/api/auth/public-token',)).data;
   }
-  async searchAnimal(searchType: QuerySeachOptions, query: string): Promise<AnimalQuery> {
+  async searchAnimal(searchType: QuerySeachOptions, query: string | number): Promise<AnimalQuery> {
     return (await this.server.get<AnimalQuery>(`/common/search-animal/${searchType}/GOAT/${query}/,`)).data;
   }
 
@@ -101,7 +101,7 @@ export default class CDCB {
     if (typeof animalIdOrAnimal === 'object') {
       const animal = animalIdOrAnimal as Animal;
       const lactation = animalKeyOrLactation as AnimalLactation;
-      return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animal.animalId}/${animal.animKey}/${lactation.lt}/${animal.sexCode}/${lactation.calvPdate}/${lactation.herdCode}`)).data;
+      return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animal.animalId}/${animal.animKey}/1/${animal.sexCode}/${lactation.calvPdate}/${lactation.herdCode}`)).data;
     } else {
       return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animalIdOrAnimal}/${animalKeyOrLactation}/1/F/${calvPdate}/${herdCode}`)).data;
     }

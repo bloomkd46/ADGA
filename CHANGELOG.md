@@ -1,3 +1,6 @@
+## 3.6.2-beta.1
+* Singificantly imporved the types for the return values of the CDCB functions
+
 ## 3.6.1-beta.3
 * EXpanded the types allowed for the search query to include `number` in addition to `string` 
 

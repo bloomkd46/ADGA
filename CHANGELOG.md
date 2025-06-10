@@ -1,3 +1,6 @@
+## 3.6.1-beta.3
+* EXpanded the types allowed for the search query to include `number` in addition to `string` 
+
 ## 3.6.1-beta.2
 * Fixed a bug in the CDCB `getLactationsTestDate()` url that caused the search to fail
 

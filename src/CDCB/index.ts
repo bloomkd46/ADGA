@@ -81,7 +81,7 @@ export default class CDCB {
     });
     return (await server.get<Login>('https://webconnect.uscdcb.com/api/auth/public-token',)).data;
   }
-  async searchAnimal(searchType: QuerySeachOptions, query: string): Promise<AnimalQuery> {
+  async searchAnimal(searchType: QuerySeachOptions, query: string | number): Promise<AnimalQuery> {
     return (await this.server.get<AnimalQuery>(`/common/search-animal/${searchType}/GOAT/${query}/,`)).data;
   }
 

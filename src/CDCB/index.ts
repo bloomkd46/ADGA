@@ -6,9 +6,6 @@ export default class CDCB {
   server = axios.create({
     baseURL: 'https://webconnect.uscdcb.com/api/',
     adapter: require('axios/lib/adapters/http'),
-    headers: {
-      'Accept-Language': 'en-US,en;q=0.9',
-    },
   });
   private loggingIn?: boolean;
   public accessToken?: string;

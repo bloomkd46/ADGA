@@ -1,3 +1,6 @@
+## 3.7.0-beta.1
+* Added an override to the CDCB `searchAnimal()` function to allow you to search using a goat's `normalizedId` from ADGA
+
 ## 3.6.2-beta.3
 * Made types available for the CDCB functions when imported
 

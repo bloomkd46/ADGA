@@ -1,5 +1,5 @@
 import axios, { type AxiosError } from 'axios';
-import { AnimalQuery, type Animal, type AnimalLactation, type LactationTestDate, type Login, type QuerySeachOptions } from './interfaces';
+import { AnimalQuery, QuerySeachOptions, type Animal, type AnimalLactation, type LactationTestDate, type Login } from './interfaces';
 
 export * from './interfaces';
 export default class CDCB {
@@ -78,8 +78,20 @@ export default class CDCB {
     });
     return (await server.get<Login>('https://webconnect.uscdcb.com/api/auth/public-token',)).data;
   }
-  async searchAnimal(searchType: QuerySeachOptions, query: string | number): Promise<AnimalQuery> {
-    return (await this.server.get<AnimalQuery>(`/common/search-animal/${searchType}/GOAT/${query}/,`)).data;
+  async searchAnimal(normalizeId: string): Promise<Animal | undefined>;
+  async searchAnimal(searchType: QuerySeachOptions, query: string | number): Promise<AnimalQuery>;
+  async searchAnimal(searchTypeOrNormalizeId: QuerySeachOptions, query?: string | number): Promise<AnimalQuery | Animal | undefined> {
+    if (query) {
+      return (await this.server.get<AnimalQuery>(`/common/search-animal/${searchTypeOrNormalizeId}/GOAT/${query}/,`)).data;
+    } else {
+      //get the last 6 characters of the normalizeId
+      const shortId = searchTypeOrNormalizeId.slice(-6);
+      const animals = (await this.searchAnimal(QuerySeachOptions.ANIM_KEY_6, shortId)).animalLists;
+      // Extract all numbers from the input string
+      const numericId = extractNumbers(searchTypeOrNormalizeId);
+      const animal = animals.find(a => a.animalId.endsWith(numericId));
+      return animal;
+    }
   }
 
   async getAnimalLactations(animalId: string, animalKey: string | number): Promise<AnimalLactation[]>;
@@ -103,4 +115,10 @@ export default class CDCB {
       return (await this.server.get<LactationTestDate>(`/lactation/get-lactations-test-date/${animalIdOrAnimal}/${animalKeyOrLactation}/1/F/${calvPdate}/${herdCode}`)).data;
     }
   }
+}
+
+// Utility function to extract all numbers from a string
+function extractNumbers(str: string): string {
+  const match = str.match(/\d+/g);
+  return match ? match.join('') : '';
 }

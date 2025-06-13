@@ -1,3 +1,6 @@
+## 3.7.1-beta.1
+* Finally resolved the bug that was causing special configurations to import the cdcb file from this library
+
 ## 3.7.0-beta.1
 * Added an override to the CDCB `searchAnimal()` function to allow you to search using a goat's `normalizedId` from ADGA
 

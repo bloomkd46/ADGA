@@ -1,6 +1,6 @@
 {
   "name": "adga",
-  "version": "3.7.0-beta.1",
+  "version": "3.7.1-beta.1",
   "description": "Unofficial ADGA (https://app.adga.org/) node.js library (SDK)",
   "license": "Apache-2.0",
   "repository": {
@@ -13,19 +13,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "./cdcb": {
-      "types": "./dist/cdcb/index.d.ts",
-      "default": "./dist/cdcb/index.js"
-    },
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+    "./cdcb": "./CDCB/index.js",
+    ".": "./index.js"
   },
   "scripts": {
     "lint": "eslint src/**.ts --max-warnings=0 --fix",
     "build": "rimraf ./dist && tsc",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "yarn build && mv dist/* . && rimraf dist",
     "watch": "nodemon --watch src --ext .ts,.json --exec 'npm run build'",
     "test": "tsc test.ts && node  --enable-source-maps test.js",
     "pull-check": "ts-node ./scripts/check.ts",

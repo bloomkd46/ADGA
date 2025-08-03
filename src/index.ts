@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, type AxiosResponse } from 'axios';
 
 import {
   AccountBalance, Awards, CurrentLoginInfo, DirectlyLinkedAccount, Goat, Goats, LinearAppraisal, LinearAppraisalYoungStock, LinkedAccounts,
@@ -135,8 +135,24 @@ export default class ADGA {
     if (!this.id && !id) {
       await this.getCurrentLoginInfo();
     }
-    return (await this.server.get(`/account/AnimalLookup/GetCurrentlyOwnedGoats?accountId=${id ?? this.id}`))
-      .data.result;
+    const initialRequest = await this.server.get<OwnedGoats>(`/account/AnimalLookup/GetCurrentlyOwnedGoats?pageSize=1&accountId=${id ?? this.id}`);
+    if (initialRequest.data.result.totalCount <= 1) {
+      return initialRequest.data.result;
+    } else {
+      const totalCount = initialRequest.data.result.totalCount;
+      const pages = Math.ceil(totalCount / 5);
+      const requests: Promise<AxiosResponse<OwnedGoats>>[] = [];
+      for (let i = 0; i < pages; i++) {
+        requests.push(this.server.get<OwnedGoats>(`/account/AnimalLookup/GetCurrentlyOwnedGoats?pageSize=5&skipCount=${(i * 5) + 1}&accountId=${id ?? this.id}`));
+      }
+      const responses = await Promise.all(requests);
+      responses.unshift(initialRequest);
+      return {
+        totalCount,
+        items: responses.flatMap(response => response.data.result.items),
+      };
+    }
+
   }
 
   async getMembershipDetails(): Promise<MembershipDetails['result']> {

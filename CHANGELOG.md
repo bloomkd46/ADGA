@@ -1,3 +1,12 @@
+## 3.8.0-beta.1
+* The CDCB library can now be imported using `import { CDCB } from 'adga/CDCB'` or `import CDCB from 'adga/cdcb'`
+  * It was previously only available as `import { CDCB } from 'adga/cdcb'`
+
+## 3.7.2-beta.1
+* Made `getOwnedGoats()` significantly faster
+  * It originally fetched all owned goats at once, which worked fine when this library was first created, but ADGA recently changed their system so that the more that you request, the longer it takes to respond.
+  * The function has now been rewritten to fetch one goat, which also includes in the response the total number of goats owned, and then it fetches the rest in batches of 5 goats at a time. These subsequent requests are all run in parallel, making them much faster than the original implementation.
+
 ## 3.7.1-beta.1
 * Finally resolved the bug that was causing special configurations to import the cdcb file from this library
 

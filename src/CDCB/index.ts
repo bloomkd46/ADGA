@@ -37,7 +37,7 @@ export default class CDCB {
       return config;
     });
     this.server.interceptors.response.use(undefined, async (err: AxiosError) => {
-      if (err.response?.status === 403) {
+      if (err.response?.status === 403 || err.response?.status === 401) {
         this.accessToken === undefined;
         if (this.loggingIn) {
           await new Promise<void>(resolve => {

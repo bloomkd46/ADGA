@@ -1,3 +1,6 @@
+## 3.8.1-beta.1
+* Fixed a bug that caused the CDCB functions to stop working if being used over a long period of time
+
 ## 3.8.0-beta.1
 * The CDCB library can now be imported using `import { CDCB } from 'adga/CDCB'` or `import CDCB from 'adga/cdcb'`
   * It was previously only available as `import { CDCB } from 'adga/cdcb'`
